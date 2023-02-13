@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const userRouter = require("../router/userRouter");
 const app = express();
 
 //use middleware to form our contact for incoming json payloads only
@@ -18,7 +19,7 @@ app.get("/", (req,res,next)=>{
 });
 
 //routers
-//app.use("/register", registrationRouter)
+app.use("/users", userRouter)
 //bad url or error we can handle with middleware
 app.use((req,res,next)=>{
   const error = new Error("Not Found");
