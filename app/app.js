@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const userRouter = require("../router/userRouter");
+const {connect} = require("../db/db");
 const app = express();
 
 //use middleware to form our contact for incoming json payloads only
@@ -35,5 +36,7 @@ app.use((req,res,next)=>{
     },
   })
  });
-
+//add to bottom of file to follow pipeline middleware
+//goes to sleep, waiting for request to come in connect only called one time when apps starts
+ connect();
 module.exports = app;
