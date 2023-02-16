@@ -1,9 +1,23 @@
 require('dotenv').config();
 const mongoose = require("mongoose")
+const User = require("../models/userModel")
+
 const connect = async () =>{
   await mongoose.connect(process.env.mongo, () =>{
     console.log(`MongoDB is up and running `);
   });
 };
 
-module.exports = { connect }
+const disconnect = async () => {
+  await mongoose.connect.close();
+};
+//obj is any json object {firstName: req.body.firstName, email: req.body.email}
+const findUser = async (obj) => {
+  User.findOne(obj)
+};
+
+const saveUser = async (newUser)=>{
+  return await newUser.save();
+};
+
+module.exports = { connect , disconnect, findUser, saveUser}
